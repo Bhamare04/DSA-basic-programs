@@ -1,0 +1,114 @@
+Merge Sort
+#include<stdio.h>
+merge(int a[10],int l,int m, int u)
+{
+int c[10],i,j,k;
+i=l;
+j=m+1;
+k=0;
+while(i<=m && j<=u)
+{
+if(a[i]<a[j])
+{
+c[k]=a[i];
+k++;
+i++;
+}
+else {
+c[k]=a[j];
+k++;
+j++;
+}
+}
+while (i<=m)
+{
+c[k]=a[i];
+i++;
+k++;
+}
+while(j<=u)
+{
+c[k]=a[j];
+k++;
+j++;
+}
+for(i=l,j=0;i<=u;i++,j++)
+a[i]=c[j];
+}
+void generate(int a[10],int n)
+{
+int i;
+for(i=0;i<n;i++)
+a[i]=rand()%10;
+}
+mergesort(int a[10],int i,int j)
+{
+int k=0;
+if(i<j)
+{
+k=(i+j)/2;
+mergesort(a,i,k);
+mergesort(a,k+1,j);
+merge(a,i,k,j);
+}
+}
+void main()
+{
+int i,n,a[10];
+printf("How Many Elements :\t");
+scanf("%d",&n);
+generate(a,n);
+printf("\n Elements are :\n");
+for(i=0;i<n;i++)
+printf("%d\t",a[i]);
+mergesort(a,0,n-1);
+printf("\nSorted elements are\n");
+for(i=0;i<n;i++)
+printf("%d\t",a[i]);
+}
+
+
+Quick Sort
+#include<stdio.h>
+void quicksort(int no[25],int first,int last)
+{
+int i,j,pivot,temp;
+if(first<last)
+{
+pivot=first;
+i=first;
+j=last;
+while(i<j)
+{
+while(no[i]<=no[pivot]&&i<last)
+i++;
+while(no[j]>no[pivot])
+j--;
+if(i<j)
+{
+temp=no[i];
+no[i]=no[j];
+no[j]=temp;
+}
+}
+temp=no[pivot];
+no[pivot]=no[j];
+no[j]=temp;
+quicksort(no,first,j-1);
+quicksort(no,j+1,last);
+}
+}
+int main()
+{
+int i,count,no[25];
+printf("Enter how many elements\t");
+scanf("%d",&count);
+printf("Enter elements\t");
+for(i=0;i<count;i++)
+scanf("%d",&no[i]);
+quicksort(no,0,count-1);
+printf("\nSorted elements are\n");
+for(i=0;i<count;i++)
+printf("%d\t",no[i]);
+return 0;
+}
